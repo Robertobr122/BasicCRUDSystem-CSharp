@@ -13,7 +13,7 @@ class ProjetoCrudEventos
 
     static void ListarOpcoes()
     {
-        System.Console.WriteLine("Selecione a opção que deseja: \n\n-------------------------\n");
+        System.Console.WriteLine("Selecione a opção que deseja: \n-------------------------");
         System.Console.WriteLine("1) Cadastrar Evento \n2) Listar Eventos \n3) Atualizar Evento \n4) Deletar Evento \n5) Sair");
         string entrada = Console.ReadLine();
 
@@ -57,9 +57,78 @@ class ProjetoCrudEventos
 
     static void Cadastrar()
     {
+        Console.Clear();
+        System.Console.WriteLine("Carregando...");
+        Thread.Sleep(3000);
+        Console.Clear();
+
+        System.Console.WriteLine("-----  Cadastro de Eventos  -----\n");
+        System.Console.WriteLine("Selecione uma opção:\n1) Cadastrar Evento\n2) Voltar");
+        string opcaoCadastro = Console.ReadLine();
+
+        if (!int.TryParse(opcaoCadastro, out int selecaoCadastro))
+        {
+            Console.Clear();
+            System.Console.WriteLine("Selecione a opção [ 1 ] ou [ 2 ]");
+            Thread.Sleep(3000);
+            Console.Clear();
+            Cadastrar();
+            return;
+        }
+
+        if (selecaoCadastro == 1)
+        {
+            Console.Clear();
+            System.Console.Write("\nDigite o nome do evento: ");
+            string nomeEvento = Console.ReadLine();
+            while (string.IsNullOrWhiteSpace(nomeEvento))
+            {
+                Console.Clear();
+                System.Console.Write("O nome não pode estar vazio!\nDigite novamente: ");
+                nomeEvento = Console.ReadLine();
+            }
+
+
+            System.Console.Write("Digite a data do evento (ex: 25/12/2025): ");
+            string dataEvento = Console.ReadLine();
+            while (!DateTime.TryParse(dataEvento, out _))
+            {
+                Console.Clear();
+                System.Console.Write("Data invalida!\nA data deve ter o formato: DIA/MÊS/ANO, ex: 25/12/2025\nDigite Novamente: ");
+                dataEvento = Console.ReadLine();
+            }
+
+
+            System.Console.Write("Digite o endereço do evento: ");
+            string enderecoEvento = Console.ReadLine();
+            while (string.IsNullOrWhiteSpace(enderecoEvento))
+            {
+                Console.Clear();
+                System.Console.Write("O endereço não pode estar vazia!\nDigite novamente: ");
+                enderecoEvento = Console.ReadLine();
+            }
+
+            var evento = new Dictionary<string, string>
+            {
+                {"nomeEvento", nomeEvento},
+                {"dataEvento", dataEvento},
+                {"enderecoEvento", enderecoEvento}
+            };
+
+            eventos.Add(evento);
+            System.Console.WriteLine("Cadastro realizado com sucessor!");
+
+        }
+        else
+        {
+            Console.Clear();
+            System.Console.WriteLine("Voltando para o menu inicial...");
+            Thread.Sleep(3000);
+            ListarOpcoes();
+            return;
+        }
 
     }
-
     static void Listar()
     {
 
