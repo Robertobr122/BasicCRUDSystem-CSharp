@@ -231,7 +231,143 @@ class ProjetoCrudEventos
 
     static void Atualizar()
     {
+        System.Console.WriteLine("Qual evento você deseja atualizar: ");
+        System.Console.WriteLine("-------------------\n");
 
+        Console.Clear();
+        System.Console.WriteLine("Carregando...");
+        Thread.Sleep(3000);
+        Console.Clear();
+
+        System.Console.WriteLine("--- Menu para Atualizar Cadastro ---");
+        System.Console.WriteLine("Selecione uma opção:\n1) Atualizar Cadastro\n2) Voltar");
+        string opcaoSelecionada = Console.ReadLine();
+
+        while (!int.TryParse(opcaoSelecionada, out int selecao))
+        {
+            Console.Clear();
+            System.Console.WriteLine("Selecione uma opção entre [ 1 ] ou [ 2 ]");
+            Thread.Sleep(2000);
+
+            Atualizar();
+        }
+
+        int opcaoSelecionada2 = int.Parse(opcaoSelecionada);
+
+        while (opcaoSelecionada2 > 2 || opcaoSelecionada2 < 1)
+        {
+            Console.Clear();
+            System.Console.WriteLine("Selecione uma opção entre [ 1 ] ou [ 2 ]");
+            Thread.Sleep(2000);
+
+            Atualizar();
+        }
+
+        if (opcaoSelecionada2 == 2)
+        {
+            Console.Clear();
+            System.Console.WriteLine("Voltando para o menu principal...");
+            Thread.Sleep(2000);
+
+            Console.Clear();
+            System.Console.WriteLine("Carregando...");
+            Thread.Sleep(3000);
+            Console.Clear();
+
+            ListarOpcoes();
+        }
+        else
+        {
+            if (eventos.Count == 0)
+            {
+                Console.Clear();
+                System.Console.WriteLine("Não existe eventos cadastrado!");
+                Thread.Sleep(2000);
+                Console.Clear();
+
+                System.Console.WriteLine("Retornando para o menu principal...");
+                Thread.Sleep(2000);
+                Console.Clear();
+
+                ListarOpcoes();
+
+            }
+            else
+            {
+                Console.Clear();
+                for (int i = 0; i < eventos.Count; i++)
+                {
+                    var evento = eventos[i];
+
+                    string nome = evento["nomeEvento"];
+                    string data = evento["dataEvento"];
+                    string local = evento["enderecoEvento"];
+
+                    System.Console.WriteLine($"\n{i + 1}º Evento Cadastrado: ");
+                    System.Console.WriteLine("-------------------");
+                    System.Console.WriteLine($"nome: {nome}");
+                    System.Console.WriteLine($"data: {data}");
+                    System.Console.WriteLine($"local: {local}");
+                    System.Console.WriteLine("-------------------\n");
+
+                }
+
+                System.Console.WriteLine("Selecione a posição do evento que deseja atualizar: (ex: 2)");
+                string indiceAtualizar = Console.ReadLine();
+
+
+                while (!int.TryParse(indiceAtualizar, out int indice) || indice < 1 || indice > eventos.Count)
+                {
+                    Console.Clear();
+                    System.Console.WriteLine("Posição inválida. Retornando para o menu Atualizar");
+                    Thread.Sleep(2000);
+                    Atualizar();
+                    return;
+                }
+
+                Thread.Sleep(2000);
+                Console.Clear();
+                int indice2 = int.Parse(indiceAtualizar);
+                int indiceReal = indice2 - 1;
+                var evento2 = eventos[indiceReal];
+
+                System.Console.WriteLine("Digite os novos dados do evento: \nATENÇÃO: Se quiser manter os valores atuais pressione ENTER");
+
+                System.Console.WriteLine($"Nome atual: {evento2["nomeEvento"]}");
+                string novoNome = Console.ReadLine();
+                if (!string.IsNullOrEmpty(novoNome))
+                {
+                    evento2["nomeEvento"] = novoNome;
+                }
+
+                System.Console.WriteLine($"Data Atual: {evento2["dataEvento"]}");
+                string novaData = Console.ReadLine();
+                if (!string.IsNullOrEmpty(novaData))
+                {
+                    DateTime dataConvertida;
+                    while (!DateTime.TryParse(novaData, out dataConvertida) || dataConvertida <= DateTime.Now)
+                    {
+                        Console.Write("Data inválida. Digite novamente:\n ATENÇÃO: A data deve ser maior que a data atual e deve seguir a estrutura DD/MM/AA");
+                        novaData = Console.ReadLine();
+                    }
+                    evento2["dataEvento"] = dataConvertida.ToString("dd/MM/yyyy");
+                }
+
+                System.Console.WriteLine($"Local Atual: {evento2["enderecoEvento"]}");
+                string novoEndereco = Console.ReadLine();
+                if (!string.IsNullOrEmpty(novoEndereco))
+                {
+                    evento2["enderecoEvento"] = novoEndereco;
+                }
+
+                System.Console.WriteLine("Dados Atualizados com Sucesso!");
+                Thread.Sleep(2000);
+                Console.Clear();
+
+                ListarOpcoes();
+                return;
+            }
+        }
     }
     static void Deletar()
     {
