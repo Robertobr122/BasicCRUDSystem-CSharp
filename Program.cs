@@ -56,7 +56,7 @@ class ProjetoCrudEventos
         }
     }
 
-    static void Cadastrar()
+     static void Cadastrar()
     {
         Console.Clear();
         System.Console.WriteLine("Carregando...");
@@ -130,6 +130,9 @@ class ProjetoCrudEventos
 
             eventos.Add(evento);
             System.Console.WriteLine("Cadastro realizado com sucessor!");
+            Thread.Sleep(3000);
+            Console.Clear();
+            ListarOpcoes();
 
         }
         else
