@@ -91,11 +91,23 @@ class ProjetoCrudEventos
 
             System.Console.Write("Digite a data do evento (ex: 25/12/2025): ");
             string dataEvento = Console.ReadLine();
-            while (!DateTime.TryParse(dataEvento, out _))
+            DateTime dataConvertida;
+
+            while (!DateTime.TryParse(dataEvento, out dataConvertida) || dataConvertida <= DateTime.Now)
             {
                 Console.Clear();
-                System.Console.Write("Data invalida!\nA data deve ter o formato: DIA/MÊS/ANO, ex: 25/12/2025\nDigite Novamente: ");
+
+                if (!DateTime.TryParse(dataEvento, out _))
+                {
+                    System.Console.Write("Data invalida!\nA data deve ter o formato: DIA/MÊS/ANO, ex: 25/12/2025\nDigite Novamente: ");
+                }
+                else
+                {
+                    System.Console.Write("Data invalida!\nA data deve ser maior que a data atual\nDigite Novamente: ");
+                }
+
                 dataEvento = Console.ReadLine();
+
             }
 
 
