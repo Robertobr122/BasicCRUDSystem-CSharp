@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Crud_Eventos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35207336edffc329632354d527d6e64dc878d5a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+641715c587b4fc2d331df6d1c058cc5094711a76")]
 [assembly: System.Reflection.AssemblyProductAttribute("Crud_Eventos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Crud_Eventos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
