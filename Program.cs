@@ -58,12 +58,11 @@ class ProjetoCrudEventos
 
     static void Cadastrar()
     {
-
+        
     }
-
     static void Listar()
     {
-
+      
     }
 
     static void Atualizar()
@@ -148,6 +147,7 @@ class ProjetoCrudEventos
             if (!int.TryParse(indiceDeletar, out int indice) || indice < 1 || indice > eventos.Count)
             {
                 System.Console.WriteLine("Numero inválido, retornando para o menu deletar");
+                Thread.Sleep(2000);
                 Deletar();
                 return;
             }
@@ -168,7 +168,11 @@ class ProjetoCrudEventos
                 Console.WriteLine("Exclusão cancelada.");
             }
 
-            Thread.Sleep(3000);
+            System.Console.WriteLine("Voltando o menu principal");
+            Thread.Sleep(2000);
+            ListarOpcoes();
+            return;
+
         }
 
 
