@@ -146,7 +146,86 @@ class ProjetoCrudEventos
     }
     static void Listar()
     {
+        Console.Clear();
+        System.Console.WriteLine("Carregando...");
+        Thread.Sleep(3000);
+        Console.Clear();
 
+        System.Console.WriteLine("--- Lista Atualizada de cadastros ---");
+        System.Console.WriteLine("Selecione uma opção:\n1) Ver Lista\n2) Voltar");
+        string opcaoSelecionada = Console.ReadLine();
+
+        while (!int.TryParse(opcaoSelecionada, out int selecao))
+        {
+            Console.Clear();
+            System.Console.WriteLine("Selecione uma opção entre [ 1 ] ou [ 2 ]");
+            Thread.Sleep(2000);
+
+            Listar();
+        }
+
+        int opcaoSelecionada2 = int.Parse(opcaoSelecionada);
+
+        while (opcaoSelecionada2 > 2 || opcaoSelecionada2 < 1)
+        {
+            Console.Clear();
+            System.Console.WriteLine("Selecione uma opção entre [ 1 ] ou [ 2 ]");
+            Thread.Sleep(2000);
+
+            Listar();
+        }
+
+        if (opcaoSelecionada2 == 2)
+        {
+            Console.Clear();
+            System.Console.WriteLine("Voltando para o menu principal...");
+            Thread.Sleep(2000);
+
+            Console.Clear();
+            System.Console.WriteLine("Carregando...");
+            Thread.Sleep(3000);
+            Console.Clear();
+
+            ListarOpcoes();
+        }
+        else
+        {
+            if (eventos.Count == 0)
+            {
+                Console.Clear();
+                System.Console.WriteLine("Não existe eventos cadastrado!");
+                Thread.Sleep(2000);
+                Console.Clear();
+
+                System.Console.WriteLine("Retornando para o menu principal...");
+                Thread.Sleep(2000);
+                Console.Clear();
+
+                ListarOpcoes();
+
+            }
+            else
+            {
+                for (int i = 0; i < eventos.Count; i++)
+                {
+                    var evento = eventos[i];
+
+                    string nome = evento["nomeEvento"];
+                    string data = evento["dataEvento"];
+                    string local = evento["enderecoEvento"];
+
+                    System.Console.WriteLine($"\n{i + 1}º Evento Cadastrado: ");
+                    System.Console.WriteLine("-------------------");
+                    System.Console.WriteLine($"nome: {nome}");
+                    System.Console.WriteLine($"data: {data}");
+                    System.Console.WriteLine($"local: {local}");
+                    System.Console.WriteLine("-------------------\n");
+
+                }
+                ListarOpcoes();
+
+            }
+        }
     }
 
     static void Atualizar()
